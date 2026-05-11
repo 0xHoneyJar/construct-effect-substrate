@@ -1,0 +1,61 @@
+schema_version: 3
+
+name: "Effect Substrate"
+slug: effect-substrate
+version: 0.1.0
+
+description: "Doctrine pack for organizing a TypeScript app around the ECS ≡ Effect ≡ Hexagonal Architecture isomorphism. Names the four-folder pattern (domain · ports · live · mock), the suffix-as-type discipline that makes behavior surfaces grep-enumerable, and the delete-heavy refactor recipe with FAGAN gates."
+short_description: "TS app organization: ECS · Effect · Hexagonal"
+
+domain:
+  - architecture
+  - refactor-pattern
+  - typescript
+
+author: 0xHoneyJar
+license: MIT
+visibility: public
+type: skill-pack
+
+repository:
+  url: https://github.com/0xHoneyJar/construct-effect-substrate.git
+
+# Doctrine pack — no executable skills. The patterns/ + examples/ files are
+# the consumable surface. Read SKILL.md first.
+skills: []
+
+aliases: []
+
+composes_with:
+  - construct-the-arcade   # OSTROM architecture lens
+  - construct-artisan      # ALEXANDER craft lens
+  - construct-fagan        # FAGAN review of refactor commits
+
+provenance:
+  origin_cycle: compass-substrate-ecs-2026-05-11
+  validated_in:
+    - project: compass
+      date: 2026-05-11
+      net_loc_delta: -1236
+      tests: 128/128
+      cycle_link: https://github.com/zksoju/compass/commits/main
+  promotion_criteria:
+    description: "Move to status:active after ≥3 validated adoptions, one in a non-Next.js codebase to verify the four-folder pattern composes outside React runtime."
+    threshold: 3
+    current_validations: 1
+
+status: candidate
+
+references:
+  - title: "Effect · Services"
+    url: https://effect.website/docs/requirements-management/services/
+  - title: "Effect · Layers + ManagedRuntime"
+    url: https://effect.website/docs/requirements-management/layers/
+  - title: "Hexagonal Architecture (Cockburn)"
+    url: https://alistair.cockburn.us/hexagonal-architecture/
+  - title: "Tef · How to write disposable code in large systems"
+    url: https://programmingisterrible.com/post/139222674273/how-to-write-disposable-code-in-large-systems
+  - title: "Anthropic SKILL.md pattern"
+    url: https://github.com/anthropics/skills
+  - title: "llmstxt.org"
+    url: https://llmstxt.org/
