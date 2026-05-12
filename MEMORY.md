@@ -1,5 +1,7 @@
 # Pack memory · what each cycle taught
 
+> **Pack-author surface · skip on first read.** First-time adopters: start at [SKILL.md](SKILL.md) · this file is for cycle authors writing the next entry.
+>
 > One line per cycle · ≤200 chars · the pack's auto-memory analog. Lineage in [`doctrine-evolution.md`](doctrine-evolution.md). Worked examples in `examples/`.
 
 ## Cycles
@@ -28,6 +30,11 @@ These came up in reviews · weren't strong enough to promote to canonical patter
 - *Vitest workspace test discovery split is a recurring papercut* (cycle 2) — not promoted · vitest-config-shape isn't substrate doctrine
 - *Plain JSON import vs `with { type: "json" }` is TS-version-dependent* (cycle 2) — captured in `hand-port-with-drift.md` SDD-corrected example · not its own pattern
 - *Flatline degraded mode #759 needs 2-agent fallback* (cycle 2) — Loa-framework concern · not pack territory
+- *Pre-squash branch tags preserve cycle-doc verifiability post-merge* (cycle 2 · BB-PR1-004) — convention proposal · not yet a pattern · push `cycle/<date>-pre-squash` before squash so cycle-doc LOC/commit-count claims survive
+- *Cycle-tag CI for compass-as-fixture* (level 3 candidate · per cycle 2 IMP-016) — would compass become a downstream CI gate for hounfour breaking changes · feasibility unclear
+- *Bidirectional drift* (level 3 candidate) — when a hand-port reveals an upstream gap that should feed back · compass cycle 3 might surface this if hounfour rejects a tracking-issue proposal
+- *Construct-substrate-conformance audit construct* (level 3 candidate) — sibling construct that scans any repo for these patterns · automates promotion-criteria check · concept only
+- *Cross-project compounding* (level 3 candidate) — when sprawl or mibera adopts and a pattern emerges that compounds across all three · would be the first non-compass validation
 
 ## How to add a cycle
 

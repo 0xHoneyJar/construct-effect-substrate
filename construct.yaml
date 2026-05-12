@@ -26,10 +26,13 @@ skills: []
 
 aliases: []
 
-composes_with:
-  - construct-the-arcade   # OSTROM architecture lens
-  - construct-artisan      # ALEXANDER craft lens
-  - construct-fagan        # FAGAN review of refactor commits
+compose_with:
+  - slug: construct-the-arcade
+    relationship: OSTROM architecture lens for seam decisions at the four-folder boundaries
+  - slug: construct-artisan
+    relationship: ALEXANDER craft lens for FAGAN-safe refactor discipline (delete-heavy-cycle)
+  - slug: construct-fagan
+    relationship: FAGAN review of refactor commits + worked-example sprint commits
 
 provenance:
   origin_cycle: compass-substrate-ecs-2026-05-11
@@ -61,12 +64,14 @@ provenance:
         - 0xHoneyJar/construct-rooms-substrate#1
         - 0xHoneyJar/loa-straylight#26
   promotion_criteria:
-    description: "Move to status:active after ≥3 validated adoptions across DISTINCT projects, one in a non-Next.js codebase to verify the four-folder pattern composes outside React runtime. Single-project compounding deepens doctrine_depth (see doctrine-evolution.md) but does not substitute for cross-project breadth."
+    description: "Move to status:active after ≥3 validated adoptions across DISTINCT projects, one in a non-Next.js codebase to verify the four-folder pattern composes outside React runtime. Single-project compounding deepens the doctrine itself (see doctrine-evolution.md for the level 1 / level 2 narrative) but does not substitute for cross-project breadth."
     threshold: 3
     current_distinct_projects: 1
-    current_total_adoptions: 2
-
-doctrine_depth: 2   # see doctrine-evolution.md · level 1 (structural) · level 2 (positional · adopt-don't-invent)
+    # Note: doctrine has compounded across 2 cycles in compass (level 1 + level 2).
+    # See doctrine-evolution.md for depth as a narrative dimension separate from breadth.
+    # Per BB-PR1-001 + BB-PR1-003: depth is narrative · not a manifest field
+    # (adding new top-level fields to construct.yaml would violate the canonical
+    # loa-constructs schema's additionalProperties: false at the root).
 
 status: candidate
 

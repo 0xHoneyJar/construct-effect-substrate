@@ -1,8 +1,8 @@
 # effect-substrate · how to organize a TS app around ECS + Effect + Hexagonal
 
-> Status: `candidate · doctrine_depth: 2` · validated across 2 cycles in 1 project (compass · 2026-05-11 + 2026-05-12) ·
+> Status: `candidate` · validated across 2 cycles in 1 project (compass · 2026-05-11 + 2026-05-12) · doctrine depth: 2 (narrative · see doctrine-evolution.md) ·
 > needs ≥ 3 distinct projects to promote to `active`.
-> See [doctrine-evolution.md](doctrine-evolution.md) for breadth (status) vs depth (doctrine_depth).
+> See [doctrine-evolution.md](doctrine-evolution.md) for breadth (status) vs depth (narrative).
 
 This pack names the isomorphism between three architectural vocabularies that
 keep proposing the same shape:

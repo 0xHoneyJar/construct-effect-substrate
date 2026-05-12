@@ -46,7 +46,7 @@ This reframe became the load-bearing PRAISE-001 finding from the bridgebuilder d
 | S1 | `[adopt:rooms-substrate]` | +200 | Vendor envelope JSONs · Effect Schema mirror · lift activity/population to Layers · pattern-lock template |
 | S2 | `[adopt:hounfour]` | +340 | 5 hand-ports + verdict union narrowing + drift script |
 | S3 | `[adopt:straylight:doc-only]` | +175 | Force-chain mapping doc + verify-fence brand type + tstyche-to-expect-type fence assertion |
-| S4 | `[adopt:lift-pattern]` | +550 | World substrate · 14 files · 3 systems mechanically applied · 3 example components · 3 CI scripts |
+| S4 | `[adopt:lift-pattern]` | +550 | World substrate · 14 files · 3 Effect Services lifted mechanically (awareness · observatory · invocation) · 3 example components · 3 CI scripts |
 | S5 | `[adopt:playbook]` | +57 (docs) | Multi-world adoption playbook · evidence-grounded stubs |
 | S6 | `[adopt:distill]` | (this PR) | Pack update · 5 new patterns · cycle-2 example · doctrine-evolution.md |
 
@@ -100,7 +100,7 @@ If the pack ever ships a third validated adoption (or a non-Next.js one), promot
 
 ## Numbers
 
-- 9 commits squashed into PR #14 (compass)
+- 9 commits squashed into PR #14 (compass) — pre-squash branch tag would preserve count for post-merge verification · convention recommended for future cycles per BB-PR1-004
 - 130 tests passing (50 root + 80 peripheral-events)
 - 5 CI gates added (all green at merge)
 - 3 upstream tracking issues filed (passive-accept after 7 days per IMP-009)

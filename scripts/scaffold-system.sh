@@ -44,11 +44,41 @@ PASCAL=$(echo "$NAME" | awk -F- '{for(i=1;i<=NF;i++) $i=toupper(substr($i,1,1)) 
 # Camel case for variable name (e.g., price-feed → priceFeed)
 CAMEL=$(echo "$NAME" | awk -F- '{for(i=2;i<=NF;i++) $i=toupper(substr($i,1,1)) substr($i,2); print}' OFS='')
 
-# Detect project name from package.json for the Service Tag namespace
-PROJECT="${PROJECT:-$(grep -E '"name"' package.json 2>/dev/null | head -1 | sed -E 's/.*"name": *"([^"]+)".*/\1/' | sed 's/[^a-zA-Z0-9-]//g')}"
+# Detect project name from package.json for the Service Tag namespace.
+# Wrap in pipefail-safe block: missing/empty package.json must fall through
+# to the "${PROJECT:-app}" default · NOT die silently (BB-PR1-002 fix).
+detect_project() {
+  set +o pipefail
+  if [ -f package.json ]; then
+    grep -E '"name"' package.json 2>/dev/null \
+      | head -1 \
+      | sed -E 's/.*"name": *"([^"]+)".*/\1/' \
+      | sed 's/[^a-zA-Z0-9-]//g'
+  fi
+  set -o pipefail
+}
+PROJECT="${PROJECT:-$(detect_project)}"
 PROJECT="${PROJECT:-app}"
 
 mkdir -p "$DIR/__tests__"
+
+# Compute the import path for the user's runtime.ts amend instructions.
+# Strip a leading `lib/` (since most projects use `@/lib/...` alias-mapped) ·
+# fall back to project-relative path if the dir doesn't start with lib/.
+# (BB-PR1-002 fix · was generating doubled-slash paths like "@//tmp/...".)
+case "$DIR" in
+  lib/*)
+    IMPORT_PATH="@/${DIR}/${NAME}.live"
+    ;;
+  lib)
+    IMPORT_PATH="@/lib/${NAME}.live"
+    ;;
+  *)
+    # Project doesn't use the lib/ convention · emit a relative-from-root path
+    # the user must adjust to their tsconfig paths config.
+    IMPORT_PATH="${DIR}/${NAME}.live  // TODO: adjust to your tsconfig paths alias"
+    ;;
+esac
 
 # Refuse to overwrite
 for suffix in port live mock; do
@@ -171,7 +201,7 @@ Next steps (manual):
   1. Edit $DIR/${NAME}.port.ts · define ${PASCAL}State / Event / Command shapes
   2. Edit $DIR/${NAME}.live.ts · wire to your existing impl (or build new)
   3. Add to lib/runtime/runtime.ts AppLayer:
-       import { ${PASCAL}Live } from "@/${DIR}/${NAME}.live";
+       import { ${PASCAL}Live } from "${IMPORT_PATH}";
        // append to Layer.mergeAll(...) arg list
   4. Optionally: cp app/_components/awareness-example.tsx app/_components/${NAME}-example.tsx
      and sed-rename Awareness → ${PASCAL}, awareness → ${CAMEL}

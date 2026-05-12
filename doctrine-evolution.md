@@ -1,5 +1,7 @@
 # Doctrine evolution · how the substrate deepens through cycles
 
+> **Pack-author surface · skip on first read.** First-time adopters: start at [SKILL.md](SKILL.md) · this file is for understanding how the pack itself evolves between cycles.
+>
 > A doctrine pack is alive when each cycle leaves it stronger than the previous found it. This file is the pack's narrative memory · what each cycle taught · what the next cycle might discover.
 
 ## Level 1 · structural isomorphism (cycle 1 · compass-substrate-ecs-2026-05-11)
@@ -34,15 +36,7 @@
 
 ## Level 3 · ??? (open · awaiting discovery)
 
-What might level 3 be? Best-guesses based on the trajectory:
-
-- **Cross-project conformance** · when multiple worlds adopt this pack and one of them lifts a pattern that compounds across all (e.g., a shared envelope schema that compass + sprawl + mibera all use, validated bidirectionally)
-- **Live-runtime adoption** of straylight signed-assertion APIs · what the brand-type fence becomes when upstream Phase 23b lands · the mechanical-swap moment
-- **Bidirectional drift** · the pack itself learning when a downstream adoption needs to feed evolution back upstream (compass's hand-port revealing a hounfour schema gap that hounfour absorbs)
-- **Construct-substrate-conformance audit** · a sibling construct that scans any repo for the patterns this pack documents · automated promotion-criteria check
-- **Doctrine-as-runtime** · the pack's patterns become enforceable lints/CI scripts that any adopting project installs as a single dependency
-
-These are guesses · the actual level-3 discovery will be made by the cycle that fires it.
+The pack will publish level 3 when a cycle discovers it. Per BB-PR1-011: speculation about what level 3 might be has been moved to [MEMORY.md §Lessons that didn't become patterns (yet)](MEMORY.md) so the published doctrine page only claims what HAS happened. Doctrine that names futures it doesn't yet have pre-shapes the next cycle.
 
 ## How doctrine deepens
 
@@ -58,16 +52,16 @@ A pack at version 0.2.0 with 1-project validation but level-2 doctrine is meanin
 
 ## Promotion criteria · revised perspective
 
-The original promotion criteria (≥3 projects · one non-Next.js) measure **breadth**. They're still in `construct.yaml` and still binding for `status: active` promotion.
+The original promotion criteria (≥3 projects · one non-Next.js) measure **breadth**. They're recorded in `construct.yaml` and still binding for `status: active` promotion.
 
 This file proposes a complement: **depth**. Each cycle that compounds the doctrine adds a new level. A pack at level-N doctrine in 1 project is a different artifact than the same pack at level-1 doctrine in 1 project · the patterns are richer · the worked example is deeper · the operator who runs the next cycle will benefit from accumulated learning.
 
 For the curious adopter who wants to know "is this pack alive?" the answer lives at two coordinates:
 
-- `status` (candidate · validated · active) — measures breadth
-- `doctrine_depth` (level 1 · level 2 · ...) — measures depth
+- `status` (candidate · validated · active) — measures breadth · in `construct.yaml`
+- doctrine depth (level 1 · level 2 · ...) — measures depth · narrative-only · this file is the canonical claim
 
-Both are recorded in `construct.yaml`. The pack's status field is the strict honest measure · the doctrine_depth field is the secondary signal that helps a next-cycle operator decide if the pack is worth the read.
+Per BB-PR1-001: doctrine depth is **narrative not manifest** · it lives in this prose, not as a `construct.yaml` field. The canonical loa-constructs schema declares `additionalProperties: false` at the root · adding a new top-level field would fragment the ecosystem schema. When a future schema_version: 4 adopts an optional `doctrine_depth: integer` field at the manifest level, this pack will adopt it. Until then, the depth dimension lives where it should: in the doctrine the pack publishes, not in the manifest validators check.
 
 ## What this file doesn't claim
 
@@ -79,7 +73,7 @@ Both are recorded in `construct.yaml`. The pack's status field is the strict hon
 ## The lineage so far
 
 ```
-└── effect-substrate (status: candidate · doctrine_depth: 2)
+└── effect-substrate (status: candidate · doctrine depth: 2 · narrative)
     ├── cycle 1 · compass-substrate-ecs-2026-05-11 (level 1 · structural isomorphism)
     └── cycle 2 · compass-substrate-agentic-translation-adoption-2026-05-12 (level 2 · adopt-don't-invent)
 ```
