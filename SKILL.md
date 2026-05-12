@@ -1,7 +1,8 @@
 # effect-substrate · how to organize a TS app around ECS + Effect + Hexagonal
 
-> Status: `candidate` · validated in 1 project (compass · 2026-05-11) ·
-> needs ≥ 3 projects to promote to `active`.
+> Status: `candidate · doctrine_depth: 2` · validated across 2 cycles in 1 project (compass · 2026-05-11 + 2026-05-12) ·
+> needs ≥ 3 distinct projects to promote to `active`.
+> See [doctrine-evolution.md](doctrine-evolution.md) for breadth (status) vs depth (doctrine_depth).
 
 This pack names the isomorphism between three architectural vocabularies that
 keep proposing the same shape:
@@ -30,26 +31,59 @@ implementations move behind it.
 
 ## What this pack adopts
 
-Read the patterns in order — each builds on the previous:
+### Level 1 · structural isomorphism (cycle 1 · 2026-05-11)
+
+Read these in order — each builds on the previous:
 
 1. **[domain-ports-live](patterns/domain-ports-live.md)** — the four-folder
-   pattern. Pure shape → service interface → production adapter → test
-   adapter. Each folder has one job.
+   pattern. Pure shape → service interface → production adapter → test adapter.
 
 2. **[suffix-as-type](patterns/suffix-as-type.md)** — the filename suffix
    discipline (`*.port.ts`, `*.live.ts`, `*.mock.ts`, `*.system.ts`) that
    makes the behavior surface enumerable in one `find` command.
 
 3. **[ecs-effect-isomorphism](patterns/ecs-effect-isomorphism.md)** — the
-   mapping table above, expanded with the boundary semantics. Tells you
-   when ECS framing is load-bearing vs decorative.
+   three-vocabulary mapping. Tells you when ECS framing is load-bearing
+   vs decorative.
 
 4. **[delete-heavy-cycle](patterns/delete-heavy-cycle.md)** — the refactor
-   recipe. Adopt this pack in an existing codebase by *deleting* more than
-   you write. Net LOC must go negative.
+   recipe. Net LOC must go negative.
+
+5. **[single-effect-provide-site](patterns/single-effect-provide-site.md)** —
+   the comment-as-spec rule + cross-layer composition. Cycle 1 named the
+   rule, cycle 2 added CI enforcement and Layer.provide threading for
+   inter-Service deps.
 
 The worked example — [compass-cycle-2026-05-11](examples/compass-cycle-2026-05-11.md)
-— shows the recipe applied end-to-end.
+— shows level-1 adoption end-to-end.
+
+### Level 2 · positional isomorphism · adopt-don't-invent (cycle 2 · 2026-05-12)
+
+Once level-1 is in place, level 2 adds the **adopt-don't-invent** doctrine
+for upstream substrate adoption:
+
+6. **[hand-port-with-drift](patterns/hand-port-with-drift.md)** — when an
+   upstream schema lives in an incompatible type system (e.g., TypeBox vs
+   Effect Schema), don't codegen a converter. Hand-port what you need,
+   vendor the JSON, let CI tell you when reality drifts.
+
+7. **[doc-only-then-runtime](patterns/doc-only-then-runtime.md)** — when
+   the upstream contract exists but the runtime hasn't shipped, adopt at
+   compile time. Document the force chain. Brand the boundary type. Wait
+   for runtime. Swap mechanically when it lands.
+
+8. **[lift-pattern-template](patterns/lift-pattern-template.md)** — the
+   5-command recipe for adding a new Effect Service. Once the four-folder
+   pattern + single-effect-provide-site discipline are in place, every new
+   service should be 5 commands or less. Operationalized via
+   [`scripts/scaffold-system.sh`](scripts/scaffold-system.sh).
+
+9. **[state-ownership-matrix](patterns/state-ownership-matrix.md)** — when
+   3+ Services share a domain, declare per-system Ref/PubSub ownership in
+   SKILL.md. CI enforces read-only declarations.
+
+The worked example — [compass-cycle-2026-05-12](examples/compass-cycle-2026-05-12.md)
+— shows level-2 adoption on top of cycle 1's level-1 substrate.
 
 ## What this pack is NOT
 
@@ -62,11 +96,18 @@ The worked example — [compass-cycle-2026-05-11](examples/compass-cycle-2026-05
   (sim · game · streaming). Document boundaries that look like CRUD on records
   don't gain from the System/Component reframe.
 
-## Promotion criteria
+## Promotion criteria · breadth and depth
 
-This pack stays `candidate` until adopted by at least three projects, one of
-which is non-Next.js. Each adoption updates `provenance.validated_in` in
-[construct.yaml](construct.yaml) with the net LOC delta and a 1-line lesson.
+This pack stays `status: candidate` until adopted by at least three **distinct**
+projects, one of which is non-Next.js. Each adoption updates
+`provenance.validated_in` in [construct.yaml](construct.yaml) with the net LOC
+delta and a 1-line lesson.
+
+The `doctrine_depth` field in `construct.yaml` is a separate dimension that
+tracks how deep the doctrine has compounded across cycles · single-project
+compounding doesn't substitute for cross-project breadth, but it does deepen
+the patterns the pack carries. See [doctrine-evolution.md](doctrine-evolution.md)
+for the level 1 / level 2 / future-level 3 narrative.
 
 ## Composes with
 

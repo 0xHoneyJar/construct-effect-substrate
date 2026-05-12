@@ -2,10 +2,10 @@ schema_version: 3
 
 name: "Effect Substrate"
 slug: effect-substrate
-version: 0.1.0
+version: 0.2.0
 
-description: "Doctrine pack for organizing a TypeScript app around the ECS ≡ Effect ≡ Hexagonal Architecture isomorphism. Names the four-folder pattern (domain · ports · live · mock), the suffix-as-type discipline that makes behavior surfaces grep-enumerable, and the delete-heavy refactor recipe with FAGAN gates."
-short_description: "TS app organization: ECS · Effect · Hexagonal"
+description: "Doctrine pack for organizing a TypeScript app around the ECS ≡ Effect ≡ Hexagonal Architecture isomorphism. Cycle 1 names the four-folder pattern (domain · ports · live · mock), the suffix-as-type discipline that makes behavior surfaces grep-enumerable, and the delete-heavy refactor recipe with FAGAN gates. Cycle 2 adds the adopt-don't-invent positional doctrine: hand-port-with-drift for upstream type adoption, doc-only-then-runtime for unblocked adoption, lift-pattern-template for mechanical Service addition, state-ownership-matrix for multi-Service composition."
+short_description: "TS app organization: ECS · Effect · Hexagonal · adopt-don't-invent"
 
 domain:
   - architecture
@@ -38,11 +38,35 @@ provenance:
       date: 2026-05-11
       net_loc_delta: -1236
       tests: 128/128
+      doctrine_level_introduced: 1   # structural isomorphism (ECS ≡ Effect ≡ Hexagonal)
       cycle_link: https://github.com/zksoju/compass/commits/main
+      cycle_doc: cycles/2026-05-11-compass-substrate-ecs.md
+    - project: compass
+      date: 2026-05-12
+      net_loc_delta: "+830 (G5a +280 substrate-conformance · G5b +550 world-substrate)"
+      tests: "130 (50 root + 80 peripheral-events)"
+      doctrine_level_introduced: 2   # positional isomorphism · adopt-don't-invent
+      cycle_link: https://github.com/project-purupuru/compass/pull/14
+      merge_commit: e486d87
+      cycle_doc: cycles/2026-05-12-compass-substrate-agentic.md
+      patterns_added:
+        - hand-port-with-drift
+        - doc-only-then-runtime
+        - lift-pattern-template
+        - state-ownership-matrix
+      patterns_compounded:
+        - single-effect-provide-site   # cross-layer composition + CI grep enforcement
+      upstream_issues_filed:
+        - 0xHoneyJar/loa-hounfour#115
+        - 0xHoneyJar/construct-rooms-substrate#1
+        - 0xHoneyJar/loa-straylight#26
   promotion_criteria:
-    description: "Move to status:active after ≥3 validated adoptions, one in a non-Next.js codebase to verify the four-folder pattern composes outside React runtime."
+    description: "Move to status:active after ≥3 validated adoptions across DISTINCT projects, one in a non-Next.js codebase to verify the four-folder pattern composes outside React runtime. Single-project compounding deepens doctrine_depth (see doctrine-evolution.md) but does not substitute for cross-project breadth."
     threshold: 3
-    current_validations: 1
+    current_distinct_projects: 1
+    current_total_adoptions: 2
+
+doctrine_depth: 2   # see doctrine-evolution.md · level 1 (structural) · level 2 (positional · adopt-don't-invent)
 
 status: candidate
 
