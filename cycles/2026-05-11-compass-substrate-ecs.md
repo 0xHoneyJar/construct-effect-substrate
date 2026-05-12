@@ -1,5 +1,7 @@
 # Cycle entry · 2026-05-11 · compass-substrate-ecs
 
+> **Pack-author surface · skip on first read.** First-time adopters: start at [`../SKILL.md`](../SKILL.md) and the pattern docs · this file is for cycle authors authoring the next entry.
+
 **Project**: compass (Solana hackathon · Next.js · TypeScript)
 **Operator**: zksoju
 **Doctrine level introduced**: 1 (structural isomorphism)

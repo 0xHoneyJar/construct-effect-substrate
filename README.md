@@ -2,7 +2,9 @@
 
 > Doctrine pack for organizing a TypeScript app around the **ECS ≡ Effect ≡ Hexagonal Architecture** isomorphism · plus the **adopt-don't-invent** positional doctrine for upstream substrate.
 >
-> **Status:** `candidate · doctrine_depth: 2` · validated across 2 cycles in 1 project (compass) · needs ≥3 distinct projects (one non-Next.js) to move to `active`. See [doctrine-evolution.md](doctrine-evolution.md) for the depth/breadth split.
+> **Status:** `candidate` · validated across 2 cycles in 1 project (compass) · doctrine depth: 2 (narrative · see [doctrine-evolution.md](doctrine-evolution.md)) · needs ≥3 distinct projects (one non-Next.js) to move to `active`.
+
+> **First-time adopters: start at [`SKILL.md`](SKILL.md).** The patterns/ docs are the consumable surface. The meta-files (`MEMORY.md`, `cycles/`, `doctrine-evolution.md`) are pack-author surfaces · they help when authoring a cycle distill · skip on first read.
 
 Three architectural vocabularies have been describing the same structure for years.
 Naming the isomorphism makes the choice between them a vocabulary preference, not
