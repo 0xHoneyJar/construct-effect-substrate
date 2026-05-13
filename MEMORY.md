@@ -8,18 +8,20 @@
 
 - [compass-substrate-ecs-2026-05-11](examples/compass-cycle-2026-05-11.md) — *structural isomorphism · 3 vocabularies converge on 4 folders · −1236 LOC · 128/128 tests*
 - [compass-substrate-agentic-translation-adoption-2026-05-12](examples/compass-cycle-2026-05-12.md) — *adopt-don't-invent · 5 hand-ports + verify-fence brand · 3 upstream tracking issues · +5 CI gates · 130/130 tests*
+- [compass-purupuru-cycle-1-wood-vertical-2026-05-13](cycles/2026-05-13-compass-purupuru-cycle-1.md) — *peer substrates · different shapes · second substrate-shaped namespace (lib/purupuru/ tiny-EventEmitter) alongside lib/honeycomb/ Effect.PubSub · proves substrate-as-category vs substrate-as-shape · +5400 LOC · 108 new tests*
 
 ## Pattern provenance (which cycle introduced each)
 
-- `domain-ports-live` — cycle 1
-- `suffix-as-type` — cycle 1
-- `ecs-effect-isomorphism` — cycle 1
+- `domain-ports-live` — cycle 1 · cycle 3 refined: applies to SOME substrate scopes, not all
+- `suffix-as-type` — cycle 1 · cycle 3 refined: subdir-as-type is the alternative for greenfield namespaces
+- `ecs-effect-isomorphism` — cycle 1 · cycle 3 added a 4th vocabulary (harness-pseudocode-to-runtime)
 - `delete-heavy-cycle` — cycle 1
-- `single-effect-provide-site` — cycle 1 (NAMED) · cycle 2 (CI-enforced + cross-layer composition)
-- `hand-port-with-drift` — cycle 2
-- `doc-only-then-runtime` — cycle 2
-- `lift-pattern-template` — cycle 2
+- `single-effect-provide-site` — cycle 1 (NAMED) · cycle 2 (CI-enforced + cross-layer composition) · cycle 3 refined: lint scope is per-namespace-using-Effect, not project-global
+- `hand-port-with-drift` — cycle 2 · cycle 3 NOT used (no upstream code substrate)
+- `doc-only-then-runtime` — cycle 2 · cycle 3 used in adapted form (S0 spike + planning docs · then runtime)
+- `lift-pattern-template` — cycle 2 · cycle 3 NOT used
 - `state-ownership-matrix` — cycle 2
+- `peer-substrates-different-shapes` — **cycle 3 (NEW)** · names "substrate is a role, not a shape · shape serves scope"
 
 ## Lessons that didn't become patterns (yet)
 
