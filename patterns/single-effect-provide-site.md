@@ -1,3 +1,9 @@
+---
+pattern_id: single-effect-provide-site
+introduced_in_cycle: compass-substrate-ecs-2026-05-11
+status: candidate
+---
+
 # Pattern · single Effect.provide site (the comment-as-spec)
 
 > Compounded cycle 2 (compass-substrate-agentic-2026-05-12). Cycle 1 named the rule. Cycle 2 enforced it via CI grep + made the canonical file's own comment the spec.

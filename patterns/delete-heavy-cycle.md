@@ -1,3 +1,9 @@
+---
+pattern_id: delete-heavy-cycle
+introduced_in_cycle: compass-substrate-ecs-2026-05-11
+status: candidate
+---
+
 # Pattern · the delete-heavy refactor cycle
 
 Adopt this pack in an existing codebase by *deleting* more than you write.

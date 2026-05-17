@@ -11,7 +11,8 @@
     "whisper",
     "pull",
     "asserted_at",
-    "lens"
+    "lens",
+    "contract_version"
   ],
   "properties": {
     "shard_id": {
@@ -69,6 +70,11 @@
       "format": "date-time",
       "type": "string",
       "description": "If operator left a honey-offering (--shrine flag), when. Bookmark for next /hakkutsu pass."
+    },
+    "contract_version": {
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Semver of the schema this shard conforms to (this schema is 1.0.0). Enum-locked per loa-constructs governance · additive-only minor bumps · major requires migration + new file + stable $id. Mirrors grounding-envelope.schema.json discipline.",
+      "type": "string"
     },
     "metadata": {
       "type": "object",

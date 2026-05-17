@@ -1,3 +1,9 @@
+---
+pattern_id: domain-ports-live
+introduced_in_cycle: compass-substrate-ecs-2026-05-11
+status: candidate
+---
+
 # Pattern · domain · ports · live · mock (the four-folder pattern)
 
 The four-folder pattern names the seam between *what shape data has* and

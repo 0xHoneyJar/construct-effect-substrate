@@ -1,3 +1,9 @@
+---
+pattern_id: hand-port-with-drift
+introduced_in_cycle: compass-substrate-agentic-translation-adoption-2026-05-12
+status: candidate
+---
+
 # Pattern · hand-port with drift detection
 
 > Discovered cycle 2 (compass-substrate-agentic-2026-05-12). When two type systems can't interop directly (Effect Schema ↔ TypeBox · Zod ↔ JSON Schema · Pydantic ↔ TS), don't invent a bridge. Hand-port the schemas you need, vendor the upstream JSON, and let CI tell you when reality drifts.

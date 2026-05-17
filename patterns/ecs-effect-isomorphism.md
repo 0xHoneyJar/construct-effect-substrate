@@ -1,3 +1,9 @@
+---
+pattern_id: ecs-effect-isomorphism
+introduced_in_cycle: compass-substrate-ecs-2026-05-11
+status: candidate
+---
+
 # Pattern · ECS ≡ Effect ≡ Hexagonal (the load-bearing insight)
 
 Three architectural vocabularies have been describing the same structure for

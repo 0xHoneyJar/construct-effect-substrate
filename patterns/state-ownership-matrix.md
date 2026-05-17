@@ -1,3 +1,9 @@
+---
+pattern_id: state-ownership-matrix
+introduced_in_cycle: compass-substrate-agentic-translation-adoption-2026-05-12
+status: candidate
+---
+
 # Pattern · state ownership matrix
 
 > Discovered cycle 2 (compass-substrate-agentic-2026-05-12 · BB-006 finding). When multiple Effect Services compose, they may share access to Refs and PubSubs. Without explicit ownership, who-writes-what becomes implicit · debug-time landmine. The matrix makes ownership a first-class declaration · CI enforces it.

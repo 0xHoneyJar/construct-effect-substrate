@@ -1,3 +1,9 @@
+---
+pattern_id: suffix-as-type
+introduced_in_cycle: compass-substrate-ecs-2026-05-11
+status: candidate
+---
+
 # Pattern · suffix-as-type (grep-enumerable behavior)
 
 Filenames are agent-readable metadata. A consistent suffix convention turns

@@ -1,3 +1,9 @@
+---
+pattern_id: doc-only-then-runtime
+introduced_in_cycle: compass-substrate-agentic-translation-adoption-2026-05-12
+status: candidate
+---
+
 # Pattern · doc-only-then-runtime adoption
 
 > Discovered cycle 2 (compass-substrate-agentic-2026-05-12). When upstream substrate's CONTRACT exists but its RUNTIME doesn't, you can still adopt — at compile time. Document the force chain. Brand the boundary type. Wait for runtime to land. Then swap implementation mechanically.

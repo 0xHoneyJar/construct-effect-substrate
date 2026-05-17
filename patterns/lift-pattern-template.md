@@ -1,3 +1,9 @@
+---
+pattern_id: lift-pattern-template
+introduced_in_cycle: compass-substrate-agentic-translation-adoption-2026-05-12
+status: candidate
+---
+
 # Pattern · lift-pattern template (5-command system add)
 
 > Discovered cycle 2 (compass-substrate-agentic-2026-05-12). Once the four-folder pattern is in place + the single Effect.provide site is enforced, adding a NEW Effect Service should be 5 commands or less. This template makes it so.
