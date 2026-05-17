@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.0xhoneyjar.com/construct-effect-substrate/1.0.0/hakkutsu-shard",
+  "additionalProperties": false,
+  "description": "Output schema for /hakkutsu invocations. A shard is a single humming signal the substrate detected across the accumulated grounding-envelope. Operator-intuition-recognizable. The substrate observes, never declares. See patterns/hakkutsu-as-divining-rod.md for doctrine. 3-5 shards per invocation (pullthread-digestibility).",
+  "type": "object",
+  "required": [
+    "shard_id",
+    "shard_name",
+    "confidence",
+    "whisper",
+    "pull",
+    "asserted_at",
+    "lens"
+  ],
+  "properties": {
+    "shard_id": {
+      "format": "uuid",
+      "type": "string"
+    },
+    "shard_name": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$",
+      "minLength": 3,
+      "maxLength": 32,
+      "description": "Short kebab-case slug · operator-rememberable · used with --thread and --shrine flags"
+    },
+    "confidence": {
+      "type": "string",
+      "enum": ["faint", "medium", "strong"],
+      "description": "Substrate-derived from cluster cohesion + size + cycle-distance + operator-recent-attention (negative-weighted)"
+    },
+    "whisper": {
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 200,
+      "description": "One-line observational signal. MUST be observational, never prescriptive (the substrate names the WHAT, never the SHOULD). Anti-pattern: declarations replacing operator intuition."
+    },
+    "pull": {
+      "type": "string",
+      "minLength": 5,
+      "maxLength": 200,
+      "description": "Next command the operator could run to dig deeper. Without a pull, hakkutsu becomes a feed; with a pull, it becomes a dialogue."
+    },
+    "asserted_at": {
+      "format": "date-time",
+      "type": "string"
+    },
+    "lens": {
+      "type": "string",
+      "enum": [
+        "general",
+        "30s",
+        "30m",
+        "30d",
+        "30y",
+        "economy",
+        "ux",
+        "loops",
+        "engagement",
+        "systems",
+        "narrative",
+        "art",
+        "social"
+      ],
+      "description": "Which legendary-studio lens hakkutsu was pointed at when this shard emerged"
+    },
+    "shrined_at": {
+      "format": "date-time",
+      "type": "string",
+      "description": "If operator left a honey-offering (--shrine flag), when. Bookmark for next /hakkutsu pass."
+    },
+    "metadata": {
+      "type": "object",
+      "patternProperties": {
+        "^.*$": {}
+      },
+      "description": "Open metadata · used for shard provenance, cluster diagnostics, etc."
+    }
+  }
+}

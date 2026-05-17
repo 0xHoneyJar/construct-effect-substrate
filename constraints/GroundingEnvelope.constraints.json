@@ -1,0 +1,119 @@
+{
+  "$schema": "https://construct-effect-substrate.dev/schemas/constraint-file.json",
+  "schema_id": "GroundingEnvelope",
+  "contract_version": "1.0.0",
+  "expression_version": "1.0",
+  "description": "Cross-field constraints for grounding-envelope. Mirrors loa-hounfour constraint DSL (expression syntax · severity error/warning · fields + type_signature). Enforces the 7 grounding invariants named in patterns/grounding-ladder-as-substrate-primitive.md.",
+  "constraints": [
+    {
+      "id": "gold-requires-utc-linked",
+      "expression": "tier == 'gold' => linked_utcs != null && linked_utcs.length >= 1",
+      "severity": "error",
+      "message": "tier=gold requires at least one linked UTC (anti-spiral tether) · prevents gold promotion from agent-forward generation without user-truth backing",
+      "fields": ["tier", "linked_utcs"],
+      "type_signature": {
+        "tier": "string",
+        "linked_utcs": "array"
+      }
+    },
+    {
+      "id": "gold-requires-grounded",
+      "expression": "tier == 'gold' => grounding_status == 'grounded'",
+      "severity": "error",
+      "message": "tier=gold requires grounding_status=grounded · refuted or unverifiable golds cannot anchor canon · refutation moves grounding_status, NOT tier",
+      "fields": ["tier", "grounding_status"],
+      "type_signature": {
+        "tier": "string",
+        "grounding_status": "string"
+      }
+    },
+    {
+      "id": "gold-utc-learning-valid",
+      "expression": "tier == 'gold' => exists(linked_utcs, lu => lu.learning_status == 'strongly-validated' || lu.learning_status == 'directionally-correct')",
+      "severity": "error",
+      "message": "tier=gold requires at least one linked UTC with learning_status in [strongly-validated, directionally-correct] · weaker learning states (smol-evidence · cant-make-a-conclusion · hypothesis-failed) cannot anchor gold",
+      "fields": ["tier", "linked_utcs"],
+      "type_signature": {
+        "tier": "string",
+        "linked_utcs": "array"
+      }
+    },
+    {
+      "id": "silver-requires-signature-or-consensus",
+      "expression": "tier == 'silver' => operator_signed == true || (blessed_by == 'construct-consensus' && metadata.consensus_voices != null && metadata.consensus_voices.length >= 2)",
+      "severity": "error",
+      "message": "tier=silver requires operator_signed=true OR construct-consensus with ≥2 voices in metadata.consensus_voices · prevents silent silver promotion",
+      "fields": ["tier", "operator_signed", "blessed_by"],
+      "type_signature": {
+        "tier": "string",
+        "operator_signed": "boolean",
+        "blessed_by": "string"
+      }
+    },
+    {
+      "id": "operator-signed-needs-blessed-by-operator",
+      "expression": "operator_signed == true => blessed_by == 'operator'",
+      "severity": "error",
+      "message": "operator_signed=true requires blessed_by=operator (signature non-transferability invariant)",
+      "fields": ["operator_signed", "blessed_by"],
+      "type_signature": {
+        "operator_signed": "boolean",
+        "blessed_by": "string"
+      }
+    },
+    {
+      "id": "refuted-requires-timestamp",
+      "expression": "grounding_status == 'refuted' => refuted_at != null",
+      "severity": "error",
+      "message": "grounding_status=refuted requires refuted_at timestamp (when refutation occurred) · provenance trace for negative ledger",
+      "fields": ["grounding_status", "refuted_at"],
+      "type_signature": {
+        "grounding_status": "string",
+        "refuted_at": "string"
+      }
+    },
+    {
+      "id": "refuted-gold-warning-integration-gate",
+      "expression": "grounding_status == 'refuted' && tier == 'gold' => false",
+      "severity": "warning",
+      "message": "tier=gold with grounding_status=refuted preserves history but downstream integrators MUST treat as ungated · consider explicit demotion to bronze via operator action · or surface in negative ledger only",
+      "fields": ["tier", "grounding_status"],
+      "type_signature": {
+        "tier": "string",
+        "grounding_status": "string"
+      }
+    },
+    {
+      "id": "refuted-at-only-with-refuted-status",
+      "expression": "refuted_at != null => grounding_status == 'refuted'",
+      "severity": "error",
+      "message": "refuted_at present requires grounding_status=refuted · prevents orphaned refutation timestamps",
+      "fields": ["refuted_at", "grounding_status"],
+      "type_signature": {
+        "refuted_at": "string",
+        "grounding_status": "string"
+      }
+    },
+    {
+      "id": "bronze-no-operator-signature-expected",
+      "expression": "tier == 'bronze' && operator_signed == true => false",
+      "severity": "warning",
+      "message": "tier=bronze with operator_signed=true suggests promotion-to-silver was forgotten · consider promoting OR explicitly demoting via operator action",
+      "fields": ["tier", "operator_signed"],
+      "type_signature": {
+        "tier": "string",
+        "operator_signed": "boolean"
+      }
+    },
+    {
+      "id": "envelope-contract-version-current",
+      "expression": "contract_version == '1.0.0'",
+      "severity": "warning",
+      "message": "contract_version != '1.0.0' · this validator was authored against 1.0.0 · check VERSIONING.md for compatibility",
+      "fields": ["contract_version"],
+      "type_signature": {
+        "contract_version": "string"
+      }
+    }
+  ]
+}

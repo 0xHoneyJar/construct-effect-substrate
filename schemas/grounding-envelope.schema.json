@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.0xhoneyjar.com/construct-effect-substrate/1.0.0/grounding-envelope",
+  "additionalProperties": false,
+  "x-cross-field-validated": true,
+  "description": "Cross-cutting envelope that propagates with every artifact through the 7 ACVP components (Reality, Contracts, Schemas, State machines, Events, Hashes, Tests). Refines the pattern's narrative 4-state framing (bronze/silver/gold/refuted) into 2 orthogonal axes: tier (3-state promotion ladder per medallion architecture) + grounding_status (3-state epistemic tristate per loa-hounfour epistemic-tristate doctrine). Source-of-truth doctrine: patterns/grounding-ladder-as-substrate-primitive.md.",
+  "type": "object",
+  "required": [
+    "envelope_id",
+    "artifact_path",
+    "tier",
+    "grounding_status",
+    "asserted_at",
+    "contract_version"
+  ],
+  "properties": {
+    "envelope_id": {
+      "format": "uuid",
+      "description": "Unique identifier for this envelope · ties artifact to provenance chain · stable across asserted_at updates",
+      "type": "string"
+    },
+    "artifact_path": {
+      "minLength": 1,
+      "description": "Path to the artifact this envelope grounds (file path · URI · or content-addressable identifier)",
+      "type": "string"
+    },
+    "tier": {
+      "description": "Promotion ladder position (medallion architecture applied to agentic content). bronze=agent-forward (default for new artifacts); silver=operator-blessed via activation receipt; gold=UTC-backed with directionally-correct or strongly-validated learning. Monotonic for promotion (bronze→silver→gold); demotion may skip (gold→bronze valid when UTC moves and operator hasn't re-blessed). Refutation does NOT collapse tier — see grounding_status for the orthogonal epistemic axis.",
+      "type": "string",
+      "enum": ["bronze", "silver", "gold"]
+    },
+    "grounding_status": {
+      "description": "Tristate epistemic status per loa-hounfour epistemic-tristate doctrine. Three states must require DIFFERENT consumer behaviors — collapse to two states = degenerated tristate. grounded=evidence (UTC link, operator signature) is current and valid · refuted=underlying UTC moved to hypothesis-failed OR operator marked refuted (refuted_at REQUIRED) · unverifiable=evidence cannot be confirmed right now (UTC unreachable, signature expired, network failure).",
+      "type": "string",
+      "enum": ["grounded", "refuted", "unverifiable"]
+    },
+    "linked_utcs": {
+      "description": "User-truth canvas references. Anti-spiral tether (Eileen's UTC doctrine: binds artifact outputs to user truth so AI work doesn't drift). REQUIRED for tier=gold. Each link carries SHA-256 quote_hash for evidence integrity.",
+      "type": "array",
+      "items": {
+        "additionalProperties": false,
+        "type": "object",
+        "required": ["canvas_url", "quote_hash"],
+        "properties": {
+          "canvas_url": {
+            "minLength": 1,
+            "description": "URL or path to the user-truth canvas (hivemind-laboratory canonical · or operator-equivalent)",
+            "type": "string"
+          },
+          "quote_hash": {
+            "pattern": "^sha256:[0-9a-f]{64}$",
+            "description": "SHA-256 hash of the canonicalized quote text from the UTC · evidence-integrity guarantee (mirrors loa-hounfour req-hash discipline)",
+            "type": "string"
+          },
+          "confidence": {
+            "minimum": 0,
+            "maximum": 1,
+            "description": "Operator-or-construct confidence in this link [0,1]",
+            "type": "number"
+          },
+          "learning_status": {
+            "description": "UTC's learning state per hivemind-laboratory labels.schema.json. tier=gold REQUIRES at least one linked UTC with learning_status in [strongly-validated, directionally-correct].",
+            "type": "string",
+            "enum": [
+              "strongly-validated",
+              "directionally-correct",
+              "hypothesis-failed",
+              "smol-evidence",
+              "cant-make-a-conclusion"
+            ]
+          }
+        }
+      }
+    },
+    "blessed_by": {
+      "description": "Who promoted this artifact past bronze. operator=operator-signed activation receipt · auto-derived=substrate inferred (via UTC link addition) · construct-consensus=multiple constructs voted to promote (requires metadata.consensus_voices)",
+      "type": "string",
+      "enum": ["operator", "auto-derived", "construct-consensus"]
+    },
+    "operator_signed": {
+      "description": "Whether the signing operator has issued an activation receipt for this artifact. REQUIRED=true for tier=silver (unless blessed_by=construct-consensus with quorum). Signature is non-transferable: only the signing operator can revoke (multi-operator projects require operator-identity per OPERATORS.md).",
+      "type": "boolean"
+    },
+    "asserted_at": {
+      "format": "date-time",
+      "description": "When this envelope was last asserted (created or updated). Updates on tier promotion · demotion · linked_utcs change · grounding_status change.",
+      "type": "string"
+    },
+    "refuted_at": {
+      "format": "date-time",
+      "description": "When refutation occurred. REQUIRED when grounding_status=refuted. Preserved if grounding_status later changes (provenance trace).",
+      "type": "string"
+    },
+    "refutation_reason": {
+      "description": "Free-text operator-helpful explanation of why refuted. Optional but encouraged for provenance + negative-ledger surface.",
+      "type": "string"
+    },
+    "contract_version": {
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Semver of the schema this envelope conforms to (this schema is 1.0.0). Enum-locked per loa-constructs governance · additive-only minor bumps · major requires migration + new file + stable $id.",
+      "type": "string"
+    },
+    "metadata": {
+      "description": "Open metadata escape hatch · 10KB consumer-side cap by convention. Use for extensions that may graduate to first-class fields later. Known patterns: consensus_voices (for blessed_by=construct-consensus), last_known_tier_before_refute, activation_context, agent_source, promotion_context.",
+      "type": "object",
+      "patternProperties": {
+        "^.*$": {}
+      }
+    }
+  }
+}
