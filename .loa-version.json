@@ -1,0 +1,17 @@
+{
+  "framework_version": "v1.167.3",
+  "schema_version": 2,
+  "installation_mode": "submodule",
+  "submodule": {
+    "path": ".loa",
+    "ref": "main",
+    "commit": "602568c52028563cbb5ad5834b3da6b250af37ac"
+  },
+  "last_sync": "2026-05-17T06:36:57Z",
+  "zones": {
+    "system": ".claude",
+    "submodule": ".loa/.claude",
+    "state": ["grimoires/loa", ".beads"],
+    "app": ["src", "lib", "app"]
+  }
+}
